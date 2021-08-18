@@ -4,10 +4,6 @@ class Cart < ApplicationRecord
     has_many :items, through: :line_items
     
     def sub_total
-        sum=0
-        line_items.each do |item|
-            sum += item.total_price
-        end
-        sum
+        line_items.sum(&:total_price)
     end
 end
