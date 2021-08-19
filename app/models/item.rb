@@ -3,7 +3,6 @@ class Item < ApplicationRecord
     has_many :categories, through: :item_categories
     has_many :line_items, dependent: :destroy
     has_many :carts, through: :line_items
-    mount_uploader :picture, ProductPictureUploader
     validates :name, presence: true, null: false, uniqueness: {case_sensitive: false}
     validates :description, presence: true, null: false
     validates :price, presence: true, numericality: true, greater_than: {0, message: 'Must be greate than 0'}
