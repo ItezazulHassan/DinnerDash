@@ -1,12 +1,25 @@
 class UsersController < ApplicationController
-    before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-    before_action :correct_user, only: [:edit, :update]
+    before_action :check_if_admin, only: [:destroy]
     def index
         @user = User.all
     end
 
     def show
-
+        @user = User.find_by(id: params[:id])
+        args = args_params || {}
+        if @user
+            if !args.nil?
+                @orders = @user.orders
+                @title = args[:title] || "Profile"
+            else
+                @orders = @user.orders.order(created_at: :desc).limit(3)
+                @title = "Recent Orders"
+            end
+        else
+            format.html { redirect_to @root_url, notice: "Could'nt find user" }
+            format.json { render :show, location: @user }
+            redirect_to root_path
+        end
     end
 
     def new
@@ -31,6 +44,7 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         if @user.update_attributes(user_params)
+            format.html { redirect_to @root_url, notice: "User was successfully updated." }
             format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,12 +66,7 @@ class UsersController < ApplicationController
         params.require(:user).permit(:name, :email, :password, :username)
     end
     
-    def admin_user
-        redirect_to root_url unless current_user.admin?
-    end
-
-    def correct_user
-        @user = User.find(params[:id])
-        redirect_to root_url unless current_user?(@user)
+    def args_params
+        args = params.require(:args).permit(:show_all, :title) if params.has_key? "args"
     end
 end
