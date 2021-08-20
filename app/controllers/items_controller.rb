@@ -1,12 +1,11 @@
 class ItemsController < ApplicationController
-    before_action :set_product, only: [:show, :edit, :update, :destroy]
-    before_action :user_is_admin, only: [:create, :edit, :update, :destroy]
+    before_action :check_if_admin, only: [:create, :destroy, :update, :edit_status]
     def index
-        redirect_to root_url
+        @foods = Food.all.order(created_at: :asc)
     end
 
     def show
-
+        @food = Food.find(params[:id])
     end
 
     def new
@@ -14,7 +13,9 @@ class ItemsController < ApplicationController
     end
 
     def edit
-
+        @food = Food.find(params[:id])
+        # Need to render template
+        # render template: "items/new"
     end
 
     def create
@@ -47,14 +48,19 @@ class ItemsController < ApplicationController
             format.json { head :no_content }
         end
     end
-
+    def edit_status
+        item = Item.find(item_params[:id].to_i)
+        unless item.nil?
+          status = item_params[:status] == true ? "available" : "not available"
+          item.status = status
+          item.save
+          render json: item
+        end
+    end
     private
 
-    def set_item
-        @item = Item.find(params[:id])
+    def item_params
+        params.require(:item).permit(:name, :description, :price, :status)
     end
 
-    def item_params
-        params.require(:item).permit(:name, :description, :price)
-    end
 end
