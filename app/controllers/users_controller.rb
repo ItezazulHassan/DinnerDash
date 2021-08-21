@@ -16,8 +16,7 @@ class UsersController < ApplicationController
                 @title = "Recent Orders"
             end
         else
-            format.html { redirect_to @root_url, notice: "Could'nt find user" }
-            format.json { render :show, location: @user }
+            flash[:message] = "We're sorry we couldn't find any information for this user."
             redirect_to root_path
         end
     end
@@ -29,11 +28,12 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
-            format.html { redirect_to @root_url, notice: "User was successfully created." }
-            format.json { render :show, status: :created, location: @user }
+            log_in @user            
+            flash[:success] = "Welcome #{user_params[:name]} to dinner dash!"
+            redirect to root_url
           else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
+            flash[:error] = "One or more required fields are missing"
+            render "new"
         end
     end
 
@@ -44,26 +44,25 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         if @user.update_attributes(user_params)
-            format.html { redirect_to @root_url, notice: "User was successfully updated." }
-            format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+            flash[:success] = "Profile Successfully Updated"redirect_to @user
+            redirect_to @user
+        else
+            render "edit"
         end
     end
 
     def destroy
         @user.destroy
         respond_to do |format|
-            format.html { redirect_to root_url, notice: "User was successfully destroyed." }
-            format.json { head :no_content }
+            flash[:success] = "#{user.name} has been deleted."
+            redirect_to root_url
         end
     end
 
     private
 
     def user_params
-        params.require(:user).permit(:name, :email, :password, :username)
+        params.require(:user).permit(:name, :email, :encrypted_password, :username)
     end
     
     def args_params

@@ -1,0 +1,54 @@
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+
+<div class="full-height scroll-bar">
+  <div class="pad-bottom">
+  <% if @ordered_items.length == 0 %>
+      <p>Your cart is empty</p>
+  <% else %>
+  <table class="hoverable">
+    <thead>
+      <tr style="background-color:#BCAAA4;">
+        <th data-field="id">S/N</th>
+        <th data-field="name">Name</th>
+        <th data-field="description">Description</th>
+        <th data-field="quantity">Quantity</th>
+        <th data-field="price">Price</th>
+        <th data-field="line total">Line Total</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% @ordered_items.each do |index, details| %>
+      <% item_id = details[:item][:id] %>
+        <tr>
+          <td><%= index %></td>
+          <td id="item_name_<%= item_id %>"><%= details[:item]['name'] %></td>
+          <td id="item_desc_<%= item_id %>"><%= details[:item]['description'] %></td>
+          <td id="item_qty_<%= item_id %>"><%=form_for 'quantity', :url => {:controller => 'cart_items', :action => 'update', item_id: details[:item][:id], id: index }, method: :patch  do |f| %>
+            <%= f.number_field details[:qty], :min => 1, :value => details[:qty], :class => "qty qty-editable-width", "data-message" => item_id %>
+            <% end %>
+          </td>
+            <td id="item_unit_price_<%= item_id %>"><%= details[:item]['price'] %></td>
+          <td>N<span class="line-total" id="item_sub_total_<%= details[:item][:id] %>" data-message="<%= details[:item]['price'] %>" ><%= details[:item]['price'].to_i * details[:qty].to_i %></span></td>
+          <td>
+            <%= button_to cart_item_delete_path(details[:item][:id]), :class => "clear-button", method: :delete  do %>
+              <i class="material-icons">clear</i>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+      <tfoot>
+        <tr style="border-top:2px solid #3e2511">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td id="total">N<%= @total%></td>
+        </tr>
+      </tfoot>
+    </table>
+    <%= button_to 'Checkout', checkout_path, :class => "btn" %>
+    <% end %>
+  </div>
+</div>

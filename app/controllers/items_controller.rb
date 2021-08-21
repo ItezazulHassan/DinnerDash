@@ -1,11 +1,11 @@
 class ItemsController < ApplicationController
     before_action :check_if_admin, only: [:create, :destroy, :update, :edit_status]
     def index
-        @foods = Food.all.order(created_at: :asc)
+        @items = Item.all.order(created_at: :asc)
     end
 
     def show
-        @food = Food.find(params[:id])
+        @item = Item.find(params[:id])
     end
 
     def new
@@ -13,30 +13,28 @@ class ItemsController < ApplicationController
     end
 
     def edit
-        @food = Food.find(params[:id])
+        @item = Item.find(params[:id])
         # Need to render template
-        # render template: "items/new"
+        render template: "items/new"
     end
 
     def create
         @item = Item.new(item_params)
+        # Need to handle picture
         if @item.save
-            format.html { redirect_to @item, notice: 'Item was successfully created.' }
-            format.json { render :show, status: :created, location: @item }
+            flash[:success] = "#{@item.name} has been added successfully."
         else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @item.errors, status: :unprocessable_entity }
+            flash[:error] = "An error occured. Try adding #{@item.name} again."
         end
     end
 
     def update
+        # Need to handle picture case here as well
         respond_to do |format|
             if @item.update_attributes(item_params)
-                format.html { redirect_to @item, notice: "Item was successfully updated." }
-                format.json { render :show, status: :ok, location: @item }
+                flash[:success] = "#{@item.name} has been updated successfully."
             else
-                format.html { render :edit, status: :unprocessable_entity }
-                format.json { render json: @item.errors, status: :unprocessable_entity }
+                flash[:error] = "An error occured. Try updating #{@item.name} again."
             end
         end
     end
@@ -44,8 +42,8 @@ class ItemsController < ApplicationController
     def destroy
         @item.destroy
         respond_to do |format|
-            format.html { redirect_to items_url, notice: "Item was successfully destroyed." }
-            format.json { head :no_content }
+            flash[:success] = "#{item.name} has been deleted."
+            redirect_to root_path
         end
     end
     def edit_status
@@ -60,7 +58,7 @@ class ItemsController < ApplicationController
     private
 
     def item_params
-        params.require(:item).permit(:name, :description, :price, :status)
+        params.require(:item).permit(:name, :description, :price, :status, :avatar)
     end
 
 end
