@@ -7,4 +7,5 @@ class Item < ApplicationRecord
     validates :description, presence: true, null: false
     validates :price, presence: true, numericality: true, greater_than: {0, message: 'Must be greate than 0'}
     validates_associated :item_categories
+    has_one_attached :avatar
 end

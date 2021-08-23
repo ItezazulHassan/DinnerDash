@@ -1,0 +1,31 @@
+<div class="panel header-panel flow-text z-depth-3">
+  <div id="title">All Users</div>
+  </div>
+<div class="full-height scroll-bar">
+  <table class="striped">
+    <thead>
+      <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Date joined</th>
+          <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to "#{user.name}" , user_path(user.id)%></td>
+          <td><%= user.email %></td>
+          <td><%= user.created_at.strftime("%Y - %e - %d") %></td>
+          <td>
+            <%= button_to user_path(user.id), :class => "clear-button", method: :delete, data: { :confirm=>'You sure?' } do %>
+              <i class="material-icons">clear</i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

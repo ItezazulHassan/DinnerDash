@@ -1,5 +1,8 @@
 class User < ApplicationRecord
-    has_secure_password
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
     has_many :orders, dependent: :destroy
     has_one :cart
     validates :name, presence: true, length: { maximum: 50}

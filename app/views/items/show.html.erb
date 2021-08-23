@@ -1,0 +1,14 @@
+<div class="full-height scroll-bar">
+  <div class="row">
+    <div class="col s12 m6 l6 flow-text">
+      <h3><%= @item.name%></h3>
+      <p><%= @item.description %></p>
+      <p><%= @item.price %></p>
+    </div>
+
+    <div class="container col s12 m6 l6">
+      <%= image_tag @item.item_image.url %>
+    </div>
+  </div>
+  
+</div>
