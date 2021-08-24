@@ -1,4 +1,4 @@
-class CurrentOrder < ApplicationRecord
+class CurrentOrder
   attr_accessor :line_items, :total
 
   def initialize(current_order)

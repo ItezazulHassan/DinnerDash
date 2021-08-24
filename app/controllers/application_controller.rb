@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
-  
+
   def set_theme
     @current_theme ||= 'full'
   end
@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
 
   def load_current_order
     session[:order] ||= {}
-    # @current_order ||= CurrentOrder.new(session[:order])
-    @current_order ||= {}
+    @current_order ||= CurrentOrder.new(session[:order])
+    # @current_order ||= {}
     # @current_order = CurrentOrder.new(session[:order])
     # @current_order = Order.new
   end
