@@ -1,15 +1,15 @@
 class CartsController < ApplicationController
     def index
         @cart_items = session[:cart]
-        @line_items = {}
+        @ordered_items = {}
         @total = 0
         @cart_items.each do |item_id, qty|
             item = Item.find_by(id: item_id)
-            @line_items[item_id] = {item: item, qty: qty}
+            @ordered_items[item_id] = {item: item, qty: qty}
             check_status(item, qty, item_id)
         end unless session[:cart].nil?
-        @current_order.line_items = @line_items
-        session[:order]["items"] = @line_items
+        # @current_order.line_items = @ordered_items
+        session[:order]["items"] = @ordered_items
     end
     
     def destroy
@@ -22,7 +22,7 @@ class CartsController < ApplicationController
         if item.flag == true
             @total += qty * item.price
         else
-            @line_items.delete(item_id)
+            @ordered_items.delete(item_id)
         end
     end
 end

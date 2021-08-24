@@ -1,36 +1,4 @@
 class LineItemsController < ApplicationController
-    def create
-		@cart.increment(params[:item_id])
-		session[:cart] = @cart.cart_data
-		redirect_to root_url
-	end
-
-	def destroy
-		@cart.destroy
-		session.delete(:cart)
-	end
-
-	def delete
-		@cart.delete(:item_id)
-      end
-
-    def update
-        cart = cart_params
-        item_id = cart[item_id]
-        quantity = cart[:quantity]
-        session[:cart][item_id] = quantity.to_i
-        session[:order]["items"][item_id]["qty"] = quantity.to_i
-        session[:order]["details"] = order_params
-        render json: {data: food_id}
-    end
-
-	private
-
-	def cart_params
-		params.require(:cart_items).permit(:item_id, :quantity)
-	end
-
-	def order_params
-		params.require(:order_details).permit(:total)
-	end
+    
 end
+	

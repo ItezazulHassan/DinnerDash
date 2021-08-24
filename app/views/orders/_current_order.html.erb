@@ -12,7 +12,7 @@
 	<tbody>
 		
 <%  @current_order.total = 0 %>
-<% @current_order.ordered_items.each do |index, details| %>
+<% @current_order.line_items.each do |index, details| %>
 <% @item_total_price = details["item"]["price"] * details["qty"]
 @current_order.total += details["item"]["price"] * details["qty"] %>
 	<tr>

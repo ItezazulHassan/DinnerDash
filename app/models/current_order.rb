@@ -3,7 +3,7 @@ class CurrentOrder < ApplicationRecord
     attr_accessor :total
 
     def initialize(current_order)
-        @ordered_items = current_order["items"] || {}
+        @line_items = current_order["items"] || {}
         current_order["details"] ||= {}
         @total = current_order["details"]["total"].to_i || 0
         @user = {}
@@ -11,7 +11,7 @@ class CurrentOrder < ApplicationRecord
     end
 
     def update_order(order, args)
-        @ordered_items = order["items"] || {}
+        @line_items = order["items"] || {}
         @total = order["details"]["total"] || 0
         @status = args[:status] || "pending"
     end
