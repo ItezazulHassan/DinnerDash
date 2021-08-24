@@ -23,12 +23,14 @@
       </div>
     </div>
     <div class="row">
-      <div class="input-field col s12">
-          <%= f.collection_select(:category_id, Category.all, :id, :title, {}, { :class => "select_box", :style => "display:block;" }) %>
-          <div class = "error"><%= @item.errors.messages[:category_id][0] %></div>
-      </div>
+    <%= f.file_field :avatar%>
     </div>
 
+    <div class="row">
+      <div class="input-field col s12">
+          <%= f.collection_select(:category_ids, @categories, :id, :name, {}, { :class => "select_box", :style => "display:block;" }) %>
+      </div>
+    </div>
   <%= f.submit "Add item", :class => "btn waves-effect waves-light" %>
   <% end %>
 </div>

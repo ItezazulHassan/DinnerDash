@@ -1,9 +1,15 @@
-<div class="row full-height">
- <%=render 'layouts/dashboard_menu' %>
- <div class="col s10 full-height scroll-bar">
-    <div id="show">
-      <%= render "administrator/orders" %>
-    </div>
- </div>
-</div>
-</div>
+<% if user_signed_in?%>
+  <% if @user.flag%>
+  <div class="row full-height">
+  <%=render 'layouts/dashboard_menu' %>
+  <div class="col s10 full-height scroll-bar">
+      <div id="show">
+        <%= render "administrator/orders" %>
+      </div>
+  </div>
+  </div>
+  </div>
+  <% else %>
+    <div>User is not an Admin</div>
+  <% end %>
+<% end %>

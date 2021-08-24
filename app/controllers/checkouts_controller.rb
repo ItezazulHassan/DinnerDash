@@ -1,9 +1,10 @@
 class CheckoutsController < ApplicationController
     def show
-        if logged_in?
-            @current_order.line_items = session[:order]["items"]
+        if user_signed_in?
+            # @current_order.line_items = session[:order]["items"]
+            render 'checkout/show'
         else
-            redirect_to login_path
+            redirect_to new_user_session_path
         end
     end
 

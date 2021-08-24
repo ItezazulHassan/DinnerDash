@@ -9,7 +9,7 @@ module ApplicationHelper
         items
     end
 
-    def this_food_in_cart(food)
+    def this_item_in_cart(item)
         item_count = 0
         if !session.nil? && !session[:cart].nil?
             item_count = session[:cart][item.id.to_s].nil? ? 0 : session[:cart][item.id.to_s]
@@ -33,6 +33,6 @@ module ApplicationHelper
     end
 
     def load_current_order
-        @current_order ||= Current_Order.new(session[:order])
+        @current_order = CurrentOrder.new(session[:order])
     end
 end

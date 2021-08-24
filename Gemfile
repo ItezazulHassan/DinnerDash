@@ -30,6 +30,13 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'devise'
 gem 'pundit'
+gem 'materialize-sass'
+gem 'material_design_icons_rails'
+gem 'material_icons'
+gem 'coffee-rails'
+gem 'jquery-rails'
+gem 'will_paginate'
+gem 'stripe-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

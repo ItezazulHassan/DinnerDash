@@ -20,6 +20,6 @@ class SessionsController < ApplicationController
 
     # def destroy
     #     log_out
-    #     redirect_to foods_path
+    #     redirect_to items_path
     # end
 end
