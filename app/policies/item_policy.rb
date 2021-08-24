@@ -20,14 +20,17 @@ class ItemPolicy < ApplicationPolicy
   def edit?
     user.flag?
   end
+
   def destroy?
     user.flag?
   end
+
   class Scope < Scope
     def initialize(user, scope)
       @user = user
       @scope = scope
     end
+
     def resolve
       if user.flag?
         scope.all
@@ -35,7 +38,9 @@ class ItemPolicy < ApplicationPolicy
         scope.where(flag: true)
       end
     end
+
     private
+
     attr_reader :user, :scope
   end
 end

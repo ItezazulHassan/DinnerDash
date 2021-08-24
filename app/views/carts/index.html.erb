@@ -52,3 +52,12 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  x = document.getElementById('quantity_1')
+  x = parseInt(x.value)
+  y = document.getElementById('item_unit_price_1')
+  y = parseInt(y.textContent)
+  c = document.getElementById('item_sub_total_1')
+  c.innerText = (x*y).toString()
+</script>
