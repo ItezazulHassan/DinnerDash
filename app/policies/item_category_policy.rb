@@ -6,6 +6,7 @@ class ItemCategoryPolicy < ApplicationPolicy
   def create?
     user.flag?
   end
+
   class Scope < Scope
     def resolve
       scope.all
