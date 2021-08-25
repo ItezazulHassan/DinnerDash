@@ -12,11 +12,21 @@
         </p>
       </p>
       <% end %>
+      <% if @item.flag == true %>
+        <%= button_to "Add to cart", cart_items_path(item_id: @item.id), :class=>"btn btn-success" %>
+      <% else %>
+        <p>Out of stock</p>
+      <% end %>
+      <% if user_signed_in?%>
+        <% if policy(@item).edit? %>
+          <%= link_to "Edit Item", edit_item_path(@item), :class=>"btn btn-success" %>          
+        <%end%>
+      <%end%>
     </div>
 
     <div class="container col s12 m6 l6">
       <%= image_tag @item.avatar, id: "drag1" %>
     </div>
   </div>
-  
+
 </div>

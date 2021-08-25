@@ -15,6 +15,10 @@ class CategoryPolicy < ApplicationPolicy
     user.flag?
   end
 
+  def edit?
+    user.flag?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

@@ -17,13 +17,17 @@ class CurrentOrder
 
   def save_order(current_user)
     user = current_user
-    new_order = user.orders.new(total: @total)
+    new_order = user.orders.new(status: @status, total: @total)
     save_successful = new_order.save
     if save_successful
       @line_items.each do |_index, details|
-        new_order.order_items <<
-          OrderItem.create(item_id: details['item']['id'],
-                           quantity: details['qty'])
+        # byebug
+        # new_order.line_items <<
+        #  LineItem.create(item_id: details['item']['id'],
+        #                  quantity: details['qty'], order_id: new_order.id)
+        @line_item = LineItem.new(item_id: details['item']['id'], quantity: details['qty'], order_id: new_order.id)
+        @line_item.save
+        new_order.line_items.push(@line_item)
       end
     end
     save_successful

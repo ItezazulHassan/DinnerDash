@@ -2,7 +2,9 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all
     @categories.each do |category|
-      authorize category
+      if user_signed_in?
+        authorize category
+      end
     end
     # Need to render template
     render 'layouts/_category.html.erb'
@@ -10,12 +12,16 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    authorize @category
+    if user_signed_in?
+      authorize @category
+    end
   end
 
   def create
     @category = Category.new(category_params)
-    authorize @category
+    if user_signed_in?
+      authorize @category
+    end
     if @category.save
       flash[:success] = 'New category Created'
       redirect_to dashboard_path
@@ -26,7 +32,9 @@ class CategoriesController < ApplicationController
 
   def edit
     @category = Category.find(params[:id])
-    authorize @category
+    if user_signed_in?
+      authorize @category
+    end
     # Need to render template
     render template: 'categories/new'
   end

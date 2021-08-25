@@ -9,18 +9,20 @@ class CheckoutsController < ApplicationController
   end
 
   def create
-    if order_params[:status].downcase === 'completed'
-      @current_order.update_order(session[:order], order_params)
-      if @current_order.save_order(@current_user)
-        session[:order] = {}
-        session[:cart] = {}
-        flash[:success] = 'Your order has been successfully placed.'
-        redirect_to root_path
-      else
-        flash[:error] = 'An error occured while saving your order. Please try again.'
-        redirect_to cart_checkout_path
-      end
+    # byebug
+    # if order_params[:status] === 'completed'
+    @current_order.update_order(session[:order], order_params)
+    # byebug
+    if @current_order.save_order(@current_user)
+      session[:order] = {}
+      session[:cart] = {}
+      flash[:success] = 'Your order has been successfully placed.'
+      redirect_to root_path
+    else
+      flash[:error] = 'An error occured while saving your order. Please try again.'
+      redirect_to cart_checkout_path
     end
+    # end
   end
 
   private
