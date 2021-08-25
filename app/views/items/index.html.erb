@@ -1,6 +1,13 @@
 <div class="row full-height">
  <%=render 'layouts/category' %>
  <div class="col s9 full-height scroll-bar">
+    <% if user_signed_in?%>
+      <% if @user.flag%>
+        <%=link_to "New Item", new_item_path,:class=>"btn btn-success", :style=>"margin-bottom: 10px, margin-left: 5px" %>
+        <%=link_to "New Category", new_category_path,:class=>"btn btn-success", :style=>"margin-bottom: 10px, margin-left: 5px" %>
+        <%=link_to "Admin Dashboard", dashboard_path,:class=>"btn btn-success", :style=>"margin-bottom: 10px, margin-left: 5px" %>
+      <% end %>
+    <% end %>
    <div class="panel header-panel flow-text z-depth-3"><%= (!@category.nil?) ? @category.name : "All cuisines"  %></div>
   <div class="row"> <% @items = (!@category.nil?) ? @category.item_categories : @items  %>
   <% @items.each do |item| %>
