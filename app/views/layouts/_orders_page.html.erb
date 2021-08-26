@@ -1,25 +1,47 @@
 <ul class="collapsible popout" data-collapsible="accordion">
  <li>
   <div class="collapsible-header">
+  <!--
     <ul class="row order-display title">
       <li class="col m2">Order</li>
       <li class="col m2">Total</li>
       <li class="col m2">Time</li>
       <li  class="col m2">Status</li>
     </ul>
+    -->
   </div>
-  <li>
+  </li>
   <% @orders.each do |order| %>
   <li>
     <div class="collapsible-header">
+    <!--
       <ul class="row order-display">
         <li class="col m2">Order: <%= order.id %></li>
         <li class="col m2">N<%= order.total || 0.0 %></li>
         <li class="col m4"><%= time_ago_in_words(order.created_at, include_seconds: true) + " ago" %></li>
         <li class="col m2"><%= order.status %></li>
       </ul>
+      -->
+      <table>
+        <thead>
+          <tr>
+            <th data-field="order">Order</th>
+            <th data-field="total">Total</th>
+            <th data-field="time">Time</th>
+            <th data-field="status">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= order.id%></td>
+            <td><%= order.total || 0.0 %></td>
+            <td><%= time_ago_in_words(order.created_at, include_seconds: true) + " ago" %></td>
+            <td><%= order.status %></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="collapsible-body">
+    <div class="collapsible-body" style="display: block">
       <table>
         <thead>
           <tr>

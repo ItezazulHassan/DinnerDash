@@ -3,9 +3,9 @@
  <div class="col s9 full-height scroll-bar">
     <% if user_signed_in?%>
       <% if @user.flag%>
-        <%=link_to "New Item", new_item_path,:class=>"btn btn-success", :style=>"margin-bottom: 10px, margin-left: 5px" %>
-        <%=link_to "New Category", new_category_path,:class=>"btn btn-success", :style=>"margin-bottom: 10px, margin-left: 5px" %>
-        <%=link_to "Admin Dashboard", dashboard_path,:class=>"btn btn-success", :style=>"margin-bottom: 10px, margin-left: 5px" %>
+        <%=link_to "New Item", new_item_path,:class=>"btn btn-success", :style=>"margin-bottom: 10px" %>
+        <%=link_to "New Category", new_category_path,:class=>"btn btn-success", :style=>"margin-bottom: 10px" %>
+        <%=link_to "Admin Dashboard", dashboard_path,:class=>"btn btn-success", :style=>"margin-bottom: 10px" %>
       <% end %>
     <% end %>
    <div class="panel header-panel flow-text z-depth-3"><%= (!@category.nil?) ? @category.name : "All cuisines"  %></div>
@@ -14,11 +14,15 @@
       <div class="col s12 m6 l4">
         <div class="card">
           <div class="card-image">
-            <span class="price-tag">N<%= item.price%></span>
+            <span class="price-tag" style="color: #4e342e; background: none"><%= item.price%> PKR</span>
             <span class="activator"><i class="material-icons right">more_vert</i></span>
             <%= link_to(item) do %>
-              <%= image_tag(("nigerian-jollof-rice.jpg"), :width => "100%", :height => "auto", :style => "max-width:100%", :class => "image-thumb", :alt => "item") %>
-              <span class="card-title"><%= item.name %></span>
+              <% if item.avatar.attached? %>
+                <%= image_tag(item.avatar, :width=> "100%", :height=> "auto", :style => "max-width:100%", :class => "image-thumb", :alt => "item")%>
+              <% else %>
+                <%= image_tag(("nigerian-jollof-rice.jpg"), :width => "100%", :height => "auto", :style => "max-width:100%", :class => "image-thumb", :alt => "item") %>
+              <% end %>
+              <span class="card-title" style="position:relative; color: #000"><%= item.name %></span>
             <% end %>
           </div>
           <div class="card-action">
