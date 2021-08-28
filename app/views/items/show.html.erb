@@ -19,8 +19,15 @@
       <% end %>
       <% if user_signed_in?%>
         <% if policy(@item).edit? %>
-          <%= link_to "Edit Item", edit_item_path(@item), :class=>"btn btn-success" %>          
+          <%= link_to "Edit Item", edit_item_path(@item), :class=>"btn btn-success" %>                    
         <%end%>
+        <% if policy(@item).update? %>
+          <%= form_with model: @item, url: edit_status_path(@item.id), method: :patch  do |f| %>
+            <%= f.select :flag, [true, false], selected: @item.flag %>
+            <%= f.submit "Change Status", :class=>"btn btn-success"%>
+          <% end %>
+        <% end %>
+
       <%end%>
     </div>
 

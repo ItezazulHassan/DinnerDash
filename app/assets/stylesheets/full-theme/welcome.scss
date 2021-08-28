@@ -8,167 +8,167 @@ $cart-active: #43a047;
 $cart-inactive: #666666;
 
 .main {
-    position: relative;
-    top: 0;
-    bottom: 20px;
+  position: relative;
+  top: 0;
+  bottom: 20px;
 }
 
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    background-size: cover;
-    // background-image: image-url('restaurant3.jpg');
-    color: #3e2723;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-size: cover;
+  // background-image: image-url('restaurant3.jpg');
+  color: #3e2723;
 }
 .bg-cover {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
 }
-header {
-    padding-top: $top-pad;
-    .row {
-        .col {
-            padding: 0 !important;
-        }
-    }
-}
+// header {
+//     padding-top: $top-pad;
+//     .row {
+//         .col {
+//             padding: 0 !important;
+//         }
+//     }
+// }
 main {
-    flex: 1 0 auto;
-    position: relative;
-    top: 0;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    padding: 0;
-    margin-top: -10px;
+  flex: 1 0 auto;
+  position: relative;
+  top: 0;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin-top: -10px;
 }
 
 footer {
-    bottom: 0;
-    position: fixed;
-    background-color: #bcaaa4 !important;
-    z-index: 10;
-    left: 0;
-    right: 0;
-    margin: 0 20px 0;
-    min-height: 10px;
+  bottom: 0;
+  position: fixed;
+  background-color: #bcaaa4 !important;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  margin: 0 20px 0;
+  min-height: 10px;
 }
 
 nav {
-    background-color: #3e2511 !important;
-    .ul {
-        .li {
-            padding-top: 6px;
-        }
+  background-color: #3e2511 !important;
+  .ul {
+    .li {
+      padding-top: 6px;
     }
+  }
 }
 .background {
-    top: 10px;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    position: relative;
-    // background-color: rgba(255,255,255,0.9);
-    padding: 0 20px;
-    max-width: 100%;
+  top: 10px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: relative;
+  // background-color: rgba(255,255,255,0.9);
+  padding: 0 20px;
+  max-width: 100%;
 }
 
 .small {
-    max-width: 50px;
-    padding-top: 6px;
+  max-width: 50px;
+  padding-top: 6px;
 }
 
 .small_pic {
-    padding-top: 3px;
-    width: 50px;
-    height: 50px;
+  padding-top: 3px;
+  width: 50px;
+  height: 50px;
 }
 footer.page-footer {
-    color: #3e2511;
-    margin: 3px 20px 0 20px !important;
-    padding-bottom: 0;
-    padding-top: 3px !important;
-    text-align: center;
+  color: #3e2511;
+  margin: 3px 20px 0 20px !important;
+  padding-bottom: 0;
+  padding-top: 3px !important;
+  text-align: center;
 }
 .img-logo {
-    top: -20px !important;
-    max-height: 100px !important;
-    float: left;
-    position: relative;
-    margin: 0 10px;
+  top: -20px !important;
+  max-height: 100px !important;
+  float: left;
+  position: relative;
+  margin: 0 10px;
 }
 .rel {
-    position: relative !important;
+  position: relative !important;
 }
 .mini-pad {
-    padding-top: 5px !important;
+  padding-top: 5px !important;
 }
 .no_left_pad {
-    padding-left: 0 !important;
+  padding-left: 0 !important;
 }
 ul.slides {
+  border-radius: 10px;
+  li {
     border-radius: 10px;
-    li {
-        border-radius: 10px;
-    }
+  }
 }
 .slider {
-    // max-height: 450px;
-    // overflow-y: hidden;
-    ul {
-        li {
-            img {
-                display: flex;
-            }
-        }
+  // max-height: 450px;
+  // overflow-y: hidden;
+  ul {
+    li {
+      img {
+        display: flex;
+      }
     }
+  }
 }
 .image-thumb {
-    position: relative;
+  position: relative;
 }
 .price-tag {
-    position: relative;
-    background: #388e3c;
-    color: #eeeeee;
-    top: 0;
-    left: 0;
+  position: relative;
+  background: #388e3c;
+  color: #eeeeee;
+  top: 0;
+  left: 0;
 }
 .col.s3.z-depth-3 {
-    // background-color: #00695c;
+  // background-color: #00695c;
 }
 .side-nav {
-    &.fixed {
-        width: 100% !important;
-    }
-    .first {
-        background-color: #66bb6a;
-        cursor: pointer;
-        color: #eeeeee;
-    }
+  &.fixed {
+    width: 100% !important;
+  }
+  .first {
+    background-color: #66bb6a;
+    cursor: pointer;
+    color: #eeeeee;
+  }
 }
 .full-height {
-    height: 100% !important;
-    max-height: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
 }
 .scroll-bar {
-    overflow: scroll !important;
+  overflow: scroll !important;
 }
 .header-panel {
-    // margin: 0px 10px;
-    padding: 5px 10px;
-    background-color: #f1ffff;
-    color: #4e342e;
+  // margin: 0px 10px;
+  padding: 5px 10px;
+  background-color: #f1ffff;
+  color: #4e342e;
 }
 .card-action {
-    padding: 10px !important;
+  padding: 10px !important;
 }
 .no-right-margin {
-    margin-right: 0 !important;
+  margin-right: 0 !important;
 }
 // .table-cloth {
 // 	background-image: image-url("table-cloth.png");
@@ -178,42 +178,42 @@ ul.slides {
 // 	border-radius: 10px;
 // }
 .in-line {
-    display: inline-block !important;
+  display: inline-block !important;
 }
 .success {
-    background-color: green;
+  background-color: green;
 }
 .error {
-    font-size: 15px;
-    color: red;
-    margin-top: -10px;
+  font-size: 15px;
+  color: red;
+  margin-top: -10px;
 }
 .cart-holder {
-    margin: 0 10px 0 10px;
-    padding-left: 10px;
-    i {
-        margin-right: 5px !important;
-    }
+  margin: 0 10px 0 10px;
+  padding-left: 10px;
+  i {
+    margin-right: 5px !important;
+  }
 }
 .empty {
-    background-color: $cart-inactive;
+  background-color: $cart-inactive;
 }
 .not-empty {
-    background-color: $cart-active;
+  background-color: $cart-active;
 }
 .qty-editable-width {
-    max-width: 50px;
+  max-width: 50px;
 }
 .clear-button {
-    background-color: transparent;
-    border: none;
+  background-color: transparent;
+  border: none;
 }
 .promo i {
-    margin: 40px 0;
-    color: #43a047;
-    font-size: 7rem;
-    display: block;
+  margin: 40px 0;
+  color: #43a047;
+  font-size: 7rem;
+  display: block;
 }
 .v-align {
-    margin-top: 15% !important;
+  margin-top: 15% !important;
 }

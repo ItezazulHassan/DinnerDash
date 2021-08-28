@@ -14,10 +14,10 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <%= render 'layouts/flash_messages' %>
     <div class="background">
       <%= render 'layouts/header' %>
       <main>
-        <%= render 'layouts/flash_messages' %>
         <%= yield %>
       </main><!--End of main-->
       <%= render 'layouts/footer' %>

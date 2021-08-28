@@ -1,0 +1,27 @@
+<div class="collapsible-body" style="display: block">
+      <table>
+        <thead>
+          <tr>
+            <th data-field="name">Name</th>
+            <th data-field="price">Price</th>
+            <th data-field="quantity">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.line_items.each do |order_item| %>
+          <% item = Item.find(order_item.item_id) %>
+            <% if item %>
+              <tr>
+                <td><%=link_to "#{item.name}", item_path(item.id) %></td>
+                <td><%= item.price %></td>
+                <td><%= order_item.quantity %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+
+      </table>
+    </div>

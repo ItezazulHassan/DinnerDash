@@ -29,14 +29,16 @@
             <th data-field="total">Total</th>
             <th data-field="time">Time</th>
             <th data-field="status">Status</th>
+            <th data-field="update">Updated at</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><%= order.id%></td>
+            <td><%= link_to "#{order.id}", user_order_path(current_user.id, order.id)%></td>
             <td><%= order.total || 0.0 %></td>
             <td><%= time_ago_in_words(order.created_at, include_seconds: true) + " ago" %></td>
             <td><%= order.status %></td>
+            <td><%= time_ago_in_words(order.updated_at, include_seconds: true) + " ago" %></td>            
           </tr>
         </tbody>
       </table>

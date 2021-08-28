@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
   def index
     @categories = Category.all
     @categories.each do |category|
-      if user_signed_in?
-        authorize category
-      end
+      authorize category if user_signed_in?
     end
     # Need to render template
     render 'layouts/_category.html.erb'
@@ -13,15 +13,15 @@ class CategoriesController < ApplicationController
   def new
     @category = Category.new
     if user_signed_in?
-      authorize @category
+      if current_user.flag?
+        authorize @category
+      end
     end
   end
 
   def create
     @category = Category.new(category_params)
-    if user_signed_in?
-      authorize @category
-    end
+    authorize @category if user_signed_in?
     if @category.save
       flash[:success] = 'New category Created'
       redirect_to dashboard_path
@@ -33,12 +33,24 @@ class CategoriesController < ApplicationController
   def edit
     @category = Category.find(params[:id])
     if user_signed_in?
-      authorize @category
+      if current_user.flag?
+        authorize @category
+      end
     end
     # Need to render template
     render template: 'categories/new'
   end
 
+  def update
+    if user_signed_in?
+      @category = Category.find(params[:id])
+      authorize @category
+      if @category.update(category_params)
+        flash[:success] = "#{@category.name} has been updated successfully."
+        redirect_to items_path
+      end
+    end
+  end
   def show
     @category = Category.find(params[:id])
     # authorize @category

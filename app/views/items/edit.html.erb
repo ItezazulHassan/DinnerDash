@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <% if current_user.flag? %>
     <div class="row container full-height scroll-bar">
-      <h4>Create new Item</h4>
+      <h4>Edit Item</h4>
       <%= form_for @item, :html => { :multipart => true, :class => "col s12" } do |f| %>
       <div class="row">
         <div class="input-field col s12">
@@ -33,7 +33,7 @@
             <%= f.collection_select(:category_ids, @categories, :id, :name, {}, { :class => "select_box", :style => "display:block;" }) %>
         </div>
       </div>
-        <%= f.submit "Add item", :class => "btn waves-effect waves-light" %>
+        <%= f.submit "Update item", :class => "btn waves-effect waves-light" %>
       <% end %>
     </div>
   <% else %>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartItemsController < ApplicationController
   def create
     @cart.increment(params[:item_id])
@@ -24,6 +26,14 @@ class CartItemsController < ApplicationController
     render json: { data: item_id }
   end
 
+  def update_quantity
+    item_id = params[:item_id]
+    quantity = params[:quantity].values[0].to_i
+    session[:cart][item_id] = quantity.to_i
+    session[:order]['items'][item_id]['qty'] = quantity.to_i
+    session[:order]['details'] = order_params
+    render json: { data: item_id }
+  end
 
   private
 

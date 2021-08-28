@@ -1,5 +1,6 @@
 <div class="row full-height">
   <% if @user %>
+    <% if @user.id == current_user.id %>
     <div class="col s4 full-height scroll-bar profile_left_tab">
       <div class="card medium">
       <div class="card-image">
@@ -23,7 +24,10 @@
       <h4 class="order_header"><%= @title %></h4>
         <%= render "layouts/orders_page" %>
     </div>
+    <% else %>
+      <div class="container">You don't have access for this</div>
+    <% end %>
   <% else %>
     <div class="container">There is no user to display</div>
-  <% end %>
+    <%end%>
 </div>

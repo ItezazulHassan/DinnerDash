@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ItemCategoryPolicy < ApplicationPolicy
   def new?
     user.flag?

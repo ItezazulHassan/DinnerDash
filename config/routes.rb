@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :carts
   resources :administrator
   resources :cart_items
+  resources :find
   resources :users do
     resources :orders
   end
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   get 'admin/categories' => 'administrator#category_index',
       as: :admin_categories
   # post "login" => "sessions#create"
+  get 'admin/ordersbystatus' => 'administrator#filter_status', as: :admin_orders_filter
   post 'checkout' => 'checkouts#show', as: :checkout
   post 'carts/checkout' => 'carts#checkout', as: :cart_checkout
   post 'payment' => 'checkouts#create', as: :payment

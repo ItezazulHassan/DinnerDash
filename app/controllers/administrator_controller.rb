@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AdministratorController < ApplicationController
   # before_action :check_if_admin, only: [:show, :update]
   # def index
@@ -51,6 +53,9 @@ class AdministratorController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def filter_status
+    byebug
+  end
   def check_if_admin
     if admin?
       true
