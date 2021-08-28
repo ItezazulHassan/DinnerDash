@@ -24,6 +24,7 @@ class CartItemsController < ApplicationController
     render json: { data: item_id }
   end
 
+
   private
 
   def cart_params

@@ -1,20 +1,19 @@
 <div class="row full-height">
-  <% if @user %>
+  <% if user_signed_in? %>
     <div class="col s4 full-height scroll-bar profile_left_tab">
       <div class="card medium">
-      <div class="card-image">
+        <div class="card-image">
           <%= image_tag "picture.png"%>
         </div>
         <div class="card-content">
           <p>Name: <%= @user.name %></p>
           <p>Email: <%= @user.email %></p>
-          <p>Username: <%= @user.username %></p>
         </div>
         <div class="card-action">
-          <%= link_to "Edit Profile", edit_user_registration_path, :style=>"color: black" %>
+          <%= link_to "Edit Profile", edit_user_path(@user.id)  %>
         <!-- </div> -->
         <!-- <div class="card-action"> -->
-        <!--<%= link_to "View Orders", :args => { :show_all => true , :title => "All Orders"} %> -->
+        <%= link_to "View Orders", :args => { :show_all => true , :title => "All Orders"} %>
         </div>
       </div>
     </div>
@@ -24,6 +23,8 @@
         <%= render "layouts/orders_page" %>
     </div>
   <% else %>
-    <div class="container">There is no user to display</div>
+    <div class="container">
+    <p style="font-size: 30px">No one is currently signed in</p>
+    </div>
   <% end %>
 </div>

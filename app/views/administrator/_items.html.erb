@@ -27,7 +27,6 @@
 					<th data-field="id">Name</th>
 					<th data-field="name">Description</th>
 					<th data-field="price">Item Price</th>
-					<th data-field="price">Category</th>
 					<th data-field="price">Available ?</th>
 					<th data-field="price">Updated</th>
 					<th data-field="price"></th>
@@ -51,7 +50,7 @@
 							</label>
 						</div>
 					</td>
-					<td><%= item.updated_at.strftime("%Y %e %d") %></td>
+					<td><%= item.updated_at.strftime("%Y %m %d") %></td>
 					<td>
 						<%= button_to item_path(item.id), :class => "clear-button", method: :delete do %>
 							<i class="material-icons">clear</i>
