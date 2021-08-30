@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_820_195_953) do
+ActiveRecord::Schema.define(version: 20_210_830_084_504) do
   create_table 'active_storage_attachments', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20_210_820_195_953) do
   create_table 'items', force: :cascade do |t|
     t.string 'name', null: false
     t.text 'description', null: false
-    t.integer 'price'
+    t.integer 'price', default: 0, null: false
     t.boolean 'flag', default: true
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20_210_820_195_953) do
     t.datetime 'updated_at', precision: 6, null: false
     t.integer 'item_id', null: false
     t.integer 'cart_id'
-    t.integer 'quantity'
+    t.integer 'quantity', default: 1, null: false
     t.integer 'order_id', null: false
     t.index ['cart_id'], name: 'index_line_items_on_cart_id'
     t.index ['item_id'], name: 'index_line_items_on_item_id'
@@ -85,11 +85,11 @@ ActiveRecord::Schema.define(version: 20_210_820_195_953) do
   end
 
   create_table 'orders', force: :cascade do |t|
-    t.string 'status'
+    t.string 'status', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.integer 'user_id', null: false
-    t.integer 'total'
+    t.integer 'total', default: 0, null: false
     t.index ['user_id'], name: 'index_orders_on_user_id'
   end
 

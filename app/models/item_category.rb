@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model for Item Category
 class ItemCategory < ApplicationRecord
   belongs_to :item
   belongs_to :category

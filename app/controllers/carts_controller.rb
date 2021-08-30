@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for cart
 class CartsController < ApplicationController
   def index
     @cart_items = session[:cart]

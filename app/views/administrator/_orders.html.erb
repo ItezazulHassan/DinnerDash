@@ -5,7 +5,7 @@
 <%= form.collection_select(:status, Order.order(:status), :id, :status) %>
 <% end %>
 <% if @orders %>
-<p style="margin: 20px">Pending Orders: <%= @orders.where(status: "Pending").length %> Completed Orders: <%= @orders.where(status: "Completed").length %></p>
+<p style="margin: 20px">Pending Orders: <%= @orders.where(status: "pending").length %> Completed Orders: <%= @orders.where(status: "Completed").length %></p>
  <%= will_paginate @orders%>
  <ul class="collapsible popout" data-collapsible="accordion">
   <li>
@@ -56,7 +56,7 @@
             <td><%= order.user.email %></td>
             <td><%= order.total || 0.0 %></td>
             <td><%= time_ago_in_words(order.created_at, include_seconds: true) + " ago" %></td>
-            <% if order.status=="Pending"%>
+            <% if order.status=="pending"%>
               <%= form_for order, :url => {:controller=> 'administrator', :action => 'update', order_id: order.id, status: order.status }, method: :patch  do |f| %>
                   <%= f.select :status, options_for_status, selected: order.status %>
 

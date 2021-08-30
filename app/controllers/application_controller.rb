@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+# Main controller
 class ApplicationController < ActionController::Base
   include Pundit
   attr_reader :cart
+
   before_action :set_theme
   before_action :load_cart
   before_action :current_user
@@ -11,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :cart
   helper_method :current_order
-  
+
   def set_theme
     @current_theme ||= 'full'
   end
@@ -27,7 +29,7 @@ class ApplicationController < ActionController::Base
     # @current_order = CurrentOrder.new(session[:order])
     # @current_order = Order.new
   end
-  
+
   protected
 
   def configure_permitted_parameters

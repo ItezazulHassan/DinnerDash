@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for orders
 class OrdersController < ApplicationController
   def index
     @user = User.find(params[:user_id])
@@ -9,7 +10,7 @@ class OrdersController < ApplicationController
   def new; end
 
   def show
-    #byebug
+    # byebug
     @order = Order.find(params[:id])
   end
 

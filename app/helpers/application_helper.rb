@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
+# Helper for Application
 module ApplicationHelper
   def items_in_cart
     items = 0
-    if !session[:cart].nil? && session[:cart].length > 0
+    if !session[:cart].nil? && session[:cart].length.positive?
       session[:cart].each do |_key, value|
         items += value
       end

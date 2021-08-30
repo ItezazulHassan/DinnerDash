@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for payments
 class PaymentsController < ApplicationController
   def create
     if @current_order.save_order(@current_user)

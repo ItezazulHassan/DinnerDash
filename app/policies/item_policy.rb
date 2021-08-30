@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Policy for Item
 class ItemPolicy < ApplicationPolicy
   # attr_reader :user, :item
   # def initialize(user, item)
@@ -27,6 +28,7 @@ class ItemPolicy < ApplicationPolicy
     user.flag?
   end
 
+  # Scope for Item
   class Scope < Scope
     def initialize(user, scope)
       @user = user
