@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model for Line Item
 class LineItem < ApplicationRecord
   # belongs_to :cart
   belongs_to :item

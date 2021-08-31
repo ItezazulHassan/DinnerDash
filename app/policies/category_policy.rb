@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Policy for Category
 class CategoryPolicy < ApplicationPolicy
   def index?
     user.flag?
@@ -24,6 +25,8 @@ class CategoryPolicy < ApplicationPolicy
   def update?
     user.flag?
   end
+
+  # Scope for Category
   class Scope < Scope
     def resolve
       scope.all

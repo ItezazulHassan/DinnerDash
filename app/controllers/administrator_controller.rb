@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for admin related tasks
 class AdministratorController < ApplicationController
   # before_action :check_if_admin, only: [:show, :update]
   # def index
@@ -8,10 +9,10 @@ class AdministratorController < ApplicationController
   #     end
   # end
   def show
-    if user_signed_in?
-      @user = User.where(id: current_user.id).take!
-      @orders = Order.all.paginate(page: params[:page], per_page: 10)
-    end
+    return unless user_signed_in?
+
+    @user = User.where(id: current_user.id).take!
+    @orders = Order.all.paginate(page: params[:page], per_page: 10)
   end
 
   def item_index
@@ -53,9 +54,6 @@ class AdministratorController < ApplicationController
     redirect_to dashboard_path
   end
 
-  def filter_status
-    byebug
-  end
   def check_if_admin
     if admin?
       true

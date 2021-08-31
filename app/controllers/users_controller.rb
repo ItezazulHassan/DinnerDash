@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for users
 class UsersController < ApplicationController
   before_action :check_if_admin, only: [:destroy]
   def index

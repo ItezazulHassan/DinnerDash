@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model for Cart
 class Cart < ApplicationRecord
   attr_reader :cart_data
 
@@ -18,6 +19,15 @@ class Cart < ApplicationRecord
   def increment(item_id)
     @cart_data[item_id] ||= 0
     increment_cart_item_by_one(item_id)
+  end
+
+  def decrement(item_id)
+    @cart_data[item_id] ||= 0
+    if @cart_data[item_id] > 0
+      @cart_data[item_id] -= 1
+    elsif @cart_data[item_id] == 0
+      delete
+    end
   end
 
   def destroy

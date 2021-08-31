@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Migration
 class AddIndexToUsers < ActiveRecord::Migration[6.1]
   def change
     change_table :users do |t|
