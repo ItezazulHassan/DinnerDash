@@ -14,7 +14,7 @@ class CartsController < ApplicationController
       end
     end
     # @current_order.line_items = @ordered_items
-    session[:order]['items'] = @ordered_items
+    session[:order]["items"] = @ordered_items
   end
 
   def destroy

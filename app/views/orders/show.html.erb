@@ -1,4 +1,6 @@
-<div class="collapsible-body" style="display: block">
+<% if user_signed_in? %>
+  <% if @order.user_id == current_user.id %>
+  <div class="collapsible-body" style="display: block">
       <table>
         <thead>
           <tr>
@@ -25,3 +27,9 @@
 
       </table>
     </div>
+    <% else %>
+    <p>You don't have permission to view another person data</p>
+  <% end %>
+  <% else %>
+  <p>You are not logged in</p>
+<% end %>

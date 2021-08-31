@@ -45,10 +45,10 @@ class AdministratorController < ApplicationController
   end
 
   def update
-    @title = 'orders'
+    @title = "orders"
     @orders = Order.all.paginate(page: params[:page], per_page: 10)
-    @status = params['order']['status']
-    @order_id = params['order_id']
+    @status = params["order"]["status"]
+    @order_id = params["order_id"]
     @order = Order.find(@order_id)
     @order.update(status: @status)
     redirect_to dashboard_path
@@ -59,7 +59,7 @@ class AdministratorController < ApplicationController
       true
     else
       redirect_to root_path
-      flash[:danger] = 'You do not have access to the Admin page'
+      flash[:danger] = "You do not have access to the Admin page"
     end
   end
 end
