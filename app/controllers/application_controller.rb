@@ -1,6 +1,17 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include Pundit
+  attr_reader :cart
+  before_action :set_theme
+  before_action :load_cart
+  before_action :current_user
+  before_action :load_current_order
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
+  helper_method :cart
+  helper_method :current_order
+  
   def set_theme
     @current_theme ||= 'full'
   end
@@ -16,18 +27,7 @@ class ApplicationController < ActionController::Base
     # @current_order = CurrentOrder.new(session[:order])
     # @current_order = Order.new
   end
-
-  attr_reader :cart
-
-  before_action :set_theme
-  before_action :load_cart
-  before_action :current_user
-  before_action :load_current_order
-  before_action :configure_permitted_parameters, if: :devise_controller?
-
-  helper_method :cart
-  helper_method :current_order
-
+  
   protected
 
   def configure_permitted_parameters

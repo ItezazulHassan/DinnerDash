@@ -35,9 +35,10 @@
 						<li><a href="/faq"><i class="material-icons left">chat</i>FAQ</a></li>
 						<!-- Dropdown Trigger -->
 
-						<li><%= image_tag("yuna.jpg", :alt => "user", :class => "circle small") %>
+						<li><%= image_tag("yuna.jpg", :alt => "user", :class => "circle small") %></li>
+						<li>
 						<% if user_signed_in? %>
-							<%= link_to "My Profile", user_path(current_user.id),:class=>"dropdown-button",:style=>"color: black" %> My profile<i class="material-icons right">arrow_drop_down</i></^>
+							<%= link_to "My Profile", user_path(current_user.id),:class=>"dropdown-button" %> My profile<i class="material-icons right">arrow_drop_down</i></^>
 						<% end %>
 						</li>
 					</ul>

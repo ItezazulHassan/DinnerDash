@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CurrentOrder
   attr_accessor :line_items, :total
 

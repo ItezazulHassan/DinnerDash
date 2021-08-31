@@ -1,7 +1,11 @@
-<div class="panel header-panel flow-text z-depth-3">
+<div class="panel header-panel flow-text z-depth-3" style="margin: 20px">
   <div id="title">All Orders</div>
 </div>
+<%= form_with model: Order, :url=> {action: "filter_status", controller: "administrator"} do |form| %>
+<%= form.collection_select(:status, Order.order(:status), :id, :status) %>
+<% end %>
 <% if @orders %>
+<p style="margin: 20px">Pending Orders: <%= @orders.where(status: "Pending").length %> Completed Orders: <%= @orders.where(status: "Completed").length %></p>
  <%= will_paginate @orders%>
  <ul class="collapsible popout" data-collapsible="accordion">
   <li>
@@ -39,6 +43,7 @@
           <tr>
             <th data-field="order">Order</th>
             <th data-field="owner">Owner</th>
+            <th data-field="email">Email</th>
             <th data-field="total">Total</th>
             <th data-field="time">Time Ordered</th>
             <th data-field="status">Status</th>
@@ -46,16 +51,21 @@
         </thead>
         <tbody>
           <tr>
-            <td><%= order.id%></td>
+            <td><%= link_to "#{order.id}", user_order_path(order.user.id, order.id)%></td>
             <td><%= order.user.name %></td>
+            <td><%= order.user.email %></td>
             <td><%= order.total || 0.0 %></td>
             <td><%= time_ago_in_words(order.created_at, include_seconds: true) + " ago" %></td>
-            <%= form_for order, :url => {:controller=> 'administrator', :action => 'update', order_id: order.id, status: order.status }, method: :patch  do |f| %>
-                <%= f.select :status, options_for_status, selected: order.status %>
+            <% if order.status=="Pending"%>
+              <%= form_for order, :url => {:controller=> 'administrator', :action => 'update', order_id: order.id, status: order.status }, method: :patch  do |f| %>
+                  <%= f.select :status, options_for_status, selected: order.status %>
 
-              <td>
-                <%= f.submit "Confirm" %>
-              </td>
+                <td>
+                  <%= f.submit "Confirm" %>
+                </td>
+              <% end %>
+              <% else %>
+                <td><%= order.status %></td>
             <% end %>
           </tr>
         </tbody>

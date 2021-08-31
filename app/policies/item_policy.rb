@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ItemPolicy < ApplicationPolicy
   # attr_reader :user, :item
   # def initialize(user, item)
@@ -32,8 +34,12 @@ class ItemPolicy < ApplicationPolicy
     end
 
     def resolve
-      if user.flag?
-        scope.all
+      if !@user.nil?
+        if user.flag?
+          scope.all
+        else
+          scope.where(flag: true)
+        end
       else
         scope.where(flag: true)
       end

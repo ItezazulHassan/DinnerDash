@@ -1,5 +1,6 @@
+<!--
 <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+-->
 <div class="full-height scroll-bar">
   <div class="pad-bottom">
   <% if @ordered_items.length == 0 %>
@@ -26,10 +27,11 @@
           <td id="item_desc_<%= item_id %>"><%= details[:item]['description'] %></td>
           <td id="item_qty_<%= item_id %>"><%=form_for 'quantity', :url => {:controller => 'cart_items', :action => 'update', item_id: details[:item][:id], id: index }, method: :patch  do |f| %>
             <%= f.number_field details[:qty], :min => 1, :value => details[:qty], :class => "qty qty-editable-width", "data-message" => item_id %>
+            <%= f.submit %>
             <% end %>
           </td>
             <td id="item_unit_price_<%= item_id %>"><%= details[:item]['price'] %></td>
-          <td>N<span class="line-total" id="item_sub_total_<%= details[:item][:id] %>" data-message="<%= details[:item]['price'] %>" ><%= details[:item]['price'].to_i * details[:qty].to_i %></span></td>
+          <td><span class="line-total" id="item_sub_total_<%= details[:item][:id] %>" data-message="<%= details[:item]['price'] %>" ><%= details[:item]['price'].to_i * details[:qty].to_i %></span></td>
           <td>
             <%= button_to cart_item_delete_path(details[:item][:id]), :class => "clear-button", method: :delete  do %>
               <i class="material-icons">clear</i>
@@ -44,7 +46,7 @@
           <td></td>
           <td></td>
           <td></td>
-          <td id="total">N<%= @total%></td>
+          <td id="total"><%= @total%> PKR</td>
         </tr>
       </tfoot>
     </table>
@@ -52,12 +54,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-  x = document.getElementById('quantity_1')
-  x = parseInt(x.value)
-  y = document.getElementById('item_unit_price_1')
-  y = parseInt(y.textContent)
-  c = document.getElementById('item_sub_total_1')
-  c.innerText = (x*y).toString()
-</script>

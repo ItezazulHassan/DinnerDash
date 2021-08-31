@@ -21,7 +21,7 @@
 		<td><%= details["item"]['description'] %></td>
 		<td><%= details["item"]['price'] %></td>
 		<td><%= details["qty"] %></td>
-		<td>N<%= @item_total_price %></td>
+		<td><%= @item_total_price %></td>
 	</tr>
 	</tbody>
 	<% end %>
@@ -36,7 +36,7 @@
 			<td></td>
 			<td>Total</td>
 			<td></td>
-			<td id="total">N<%= @current_order.total %></td>
+			<td id="total"><%= @current_order.total %> PKR</td>
 		</tr>
 	</tfoot>
 </table>

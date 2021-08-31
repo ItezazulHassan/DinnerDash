@@ -1,14 +1,21 @@
-<div class="row container full-height scroll-bar">
-<h4>Create new item category</h4>
-  <%= form_for @category, :html => { :multipart => true, :class => "col s12" } do |f| %>
-    <div class="row">
-      <div class="input-field col s12">
-        <%=f.text_field :name, :class => "validate" %>
-        <%= f.label :name %>
-        <div class = "error"><%= @category.errors.messages[:name][0] %></div>
-      </div>
+<%if user_signed_in? %>
+  <% if current_user.flag? %>
+    <div class="row container full-height scroll-bar">
+      <h4>Create new item category</h4>
+      <%= form_for @category, :html => { :multipart => true, :class => "col s12" } do |f| %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%=f.text_field :name, :class => "validate" %>
+            <%= f.label :name, :class => "active", "data-error" => "#{@category.errors.messages['name']}" %>
+            <div class = "error"><%= @category.errors.messages[:name][0] %></div>
+          </div>
+        </div>
+        <%= f.submit "Save", :class => "btn waves-effect waves-light" %>
+      <% end %>
     </div>
-    
-  <%= f.submit "Save", :class => "btn waves-effect waves-light" %>
+  <% else %>
+    <div class="container">You are not an admin</div>
   <% end %>
-</div>
+<% else %>
+  <div class="container">You are not logged in</div>
+<% end %>
