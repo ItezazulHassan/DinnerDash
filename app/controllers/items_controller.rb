@@ -11,7 +11,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    begin
+      @item = policy_scope(Item).find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      redirect_to items_path
+      flash[:error] = "Item not found"
+    end
     @user = User.find(@current_user.id) if user_signed_in?
   end
 
@@ -91,7 +96,7 @@ class ItemsController < ApplicationController
 
     item = Item.find(params[:item_id].to_i)
     unless item.nil?
-      flag = item_params[:flag] != 'true'
+      flag = item_params[:flag] != "true"
       # byebug
       item.flag = flag
       item.save
@@ -100,8 +105,7 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def item_params
-    params.require(:item).permit(:name, :description, :price, :flag, :avatar)
-  end
+    def item_params
+      params.require(:item).permit(:name, :description, :price, :flag, :avatar)
+    end
 end

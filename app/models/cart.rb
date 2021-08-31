@@ -39,8 +39,7 @@ class Cart < ApplicationRecord
   end
 
   private
-
-  def increment_cart_item_by_one(item_id)
-    @cart_data[item_id] += 1
-  end
+    def increment_cart_item_by_one(item_id)
+      @cart_data[item_id] += 1
+    end
 end

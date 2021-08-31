@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class CartsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do

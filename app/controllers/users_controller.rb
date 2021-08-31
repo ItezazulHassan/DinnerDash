@@ -13,10 +13,10 @@ class UsersController < ApplicationController
     if @user
       if !args.nil?
         @orders = @user.orders
-        @title = args[:title] || 'Profile'
+        @title = args[:title] || "Profile"
       else
         @orders = @user.orders.order(created_at: :desc).limit(3)
-        @title = 'Recent Orders'
+        @title = "Recent Orders"
       end
     else
       flash[:message] = "We're sorry we couldn't find any information for this user."
@@ -35,8 +35,8 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome #{user_params[:name]} to dinner dash!"
       redirect to root_url
     else
-      flash[:error] = 'One or more required fields are missing'
-      render 'new'
+      flash[:error] = "One or more required fields are missing"
+      render "new"
     end
   end
 
@@ -47,10 +47,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = 'Profile Successfully Updated'
+      flash[:success] = "Profile Successfully Updated"
       redirect_to @user
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -63,12 +63,11 @@ class UsersController < ApplicationController
   end
 
   private
+    def user_params
+      params.require(:user).permit(:name, :email, :encrypted_password, :username)
+    end
 
-  def user_params
-    params.require(:user).permit(:name, :email, :encrypted_password, :username)
-  end
-
-  def args_params
-    args = params.require(:args).permit(:show_all, :title) if params.has_key? 'args'
-  end
+    def args_params
+      args = params.require(:args).permit(:show_all, :title) if params.has_key? "args"
+    end
 end
