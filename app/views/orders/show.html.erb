@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
-  <% if @order.user_id == current_user.id %>
-  <div class="collapsible-body" style="display: block">
+  <% if @order.user_id == current_user.id || current_user.flag? %>
+    <div class="collapsible-body" style="display: block">
       <table>
         <thead>
           <tr>
@@ -11,14 +11,14 @@
         </thead>
         <tbody>
           <% @order.line_items.each do |order_item| %>
-          <% item = Item.find(order_item.item_id) %>
-            <% if item %>
-              <tr>
-                <td><%=link_to "#{item.name}", item_path(item.id) %></td>
-                <td><%= item.price %></td>
-                <td><%= order_item.quantity %></td>
-              </tr>
-            <% end %>
+            <% item = Item.find(order_item.item_id) %>
+              <% if item %>
+                <tr>
+                  <td><%=link_to "#{item.name}", item_path(item.id) %></td>
+                  <td><%= item.price %></td>
+                  <td><%= order_item.quantity %></td>
+                </tr>
+              <% end %>
           <% end %>
         </tbody>
         <tfoot>
@@ -27,9 +27,9 @@
 
       </table>
     </div>
-    <% else %>
+  <% else %>
     <p>You don't have permission to view another person data</p>
   <% end %>
-  <% else %>
+<% else %>
   <p>You are not logged in</p>
 <% end %>

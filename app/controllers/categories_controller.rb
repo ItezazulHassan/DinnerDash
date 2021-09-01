@@ -28,7 +28,13 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
+    begin
+      @category = Category.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+      flash[:failure] = "Category not found"
+      return
+    end
     authorize @category if user_signed_in? && current_user.flag?
     # Need to render template
     render template: "categories/new"
@@ -36,8 +42,13 @@ class CategoriesController < ApplicationController
 
   def update
     return unless user_signed_in?
-
-    @category = Category.find(params[:id])
+    begin
+      @category = Category.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+      flash[:failure] = "Category not found"
+      return
+    end
     authorize @category
     if @category.update(category_params)
       flash[:success] = "#{@category.name} has been updated successfully."
@@ -46,7 +57,13 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+    begin
+      @category = Category.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+      flash[:failure] = "Category not found"
+      return
+    end
     # authorize @category
     # Need to render template
     @items = @category.items

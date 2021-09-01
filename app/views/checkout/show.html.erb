@@ -2,16 +2,15 @@
   <div class="pad-bottom">
     <h3>Confirm your order</h3>
     <% if @current_order.line_items.length == 0 %>
-        <p>Your cart is still empty. What is your problem?</p>
+      <p>Your cart is still empty. What is your problem?</p>
     <% else %>
       <%= render "orders/current_order" %>
-    <div>
-      <%= link_to 'Back to my cart', carts_path, :class => "btn btn-success in-line left" %>
+      <div>
+        <%= link_to 'Back to my cart', carts_path, :class => "btn btn-success in-line left" %>
       
-      <%= button_to 'Place Order', get_payment_completed_path, :class => "btn btn-success" %>
-    </div>
+        <%= button_to 'Place Order', get_payment_completed_path, :class => "btn btn-success" %>
+      </div>
     <% end %>
   </div>
-
 
 </div>

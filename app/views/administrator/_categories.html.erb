@@ -8,22 +8,22 @@
   </div><!--end of header-->
   <div class="body">
     <table class="striped">
-    <thead>
-      <tr>
-        <th data-field="id">Name</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @categories.each do |category| %>
-        <a href = "/>">
+      <thead>
         <tr>
-          <td><%=link_to "#{category.name}", edit_category_path(category.id) %></td>
+          <th data-field="id">Name</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  </div><!--end of header-->
+      </thead>
+
+      <tbody>
+        <% @categories.each do |category| %>
+          <a href = "/>">
+          <tr>
+            <td><%=link_to "#{category.name}", edit_category_path(category.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div><!--end of body-->
 
   <div class="footer">
     <div class="row">

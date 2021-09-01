@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   def show
     begin
       @item = policy_scope(Item).find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
+    rescue ActiveRecord::RecordNotFound
       redirect_to items_path
       flash[:error] = "Item not found"
     end
@@ -65,8 +65,13 @@ class ItemsController < ApplicationController
   def update
     # Need to handle picture case here as well
     return unless user_signed_in?
-
-    @item = Item.find(params[:id])
+    begin
+      @item = Item.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+      flash[:failure] = "Item not found"
+      return
+    end
     authorize @item
 
     if @item.update(item_params)
@@ -93,8 +98,13 @@ class ItemsController < ApplicationController
   def edit_status
     # byebug
     return unless user_signed_in?
-
-    item = Item.find(params[:item_id].to_i)
+    begin
+      item = Item.find(params[:item_id].to_i)
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+      flash[:failure] = "Item not found"
+      return
+    end
     unless item.nil?
       flag = item_params[:flag] != "true"
       # byebug

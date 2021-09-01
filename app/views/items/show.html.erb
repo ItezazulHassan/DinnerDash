@@ -5,12 +5,12 @@
       <p><%= @item.description %></p>
       <p><%= @item.price %></p>
       <% if !@item.categories.empty?%>
-      <p>
         <p>
-        Category: 
-        <%= @item.categories[0].name %>
+          <p>
+          Category: 
+          <%= @item.categories[0].name %>
+          </p>
         </p>
-      </p>
       <% end %>
       <% if @item.flag == true %>
         <%= button_to "Add to cart", cart_items_path(item_id: @item.id), :class=>"btn btn-success" %>

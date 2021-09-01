@@ -2,104 +2,104 @@
   <div id="title">All Orders</div>
 </div>
 <%= form_with model: Order, :url=> {action: "filter_status", controller: "administrator"} do |form| %>
-<%= form.collection_select(:status, Order.order(:status), :id, :status) %>
+  <%= form.collection_select(:status, Order.order(:status), :id, :status) %>
 <% end %>
 <% if @orders %>
-<p style="margin: 20px">Pending Orders: <%= @orders.where(status: "pending").length %> Completed Orders: <%= @orders.where(status: "Completed").length %></p>
- <%= will_paginate @orders%>
- <ul class="collapsible popout" data-collapsible="accordion">
-  <li>
-   <div class="collapsible-header">
-   <!--
-     <ul class="row order-display title">
-       <li class="col m1">Order</li>
-       <li class="col m2">Owner</li>
-       <li class="col m1">Total</li>
-       <li class="col m2">Time Ordered</li>
-       <li class="col m2">Status</li>
-       <li class="col m1"></li>
-     </ul>
-     -->
-   </div>
-   <li>
-   <% @orders.each do |order| %>
-   <li>
-     <div class="collapsible-header">
-     <!--
-       <ul class="row order-display">
-         <li class="col m1"> <%= order.id %></li>
-         <li class="col m2"><%= order.user.name %></li>
-         <li class="col m1">N<%= order.total || 0.0 %></li>
-         <li class="col m2"><%= time_ago_in_words(order.created_at, include_seconds: true) + " ago"%></li>
-         <%= form_for order, :url => {:controller=> 'administrator', :action => 'update', order_id: order.id, status: order.status }, method: :patch  do |f| %>
-         <li class="col m2"><%= f.select :status, options_for_status, selected: order.status %></li>
-          <li class="col m1"><%= f.submit "Confirm" %></li>
-         <% end %>
-
-       </ul>
-       -->
-       <table>
-        <thead>
-          <tr>
-            <th data-field="order">Order</th>
-            <th data-field="owner">Owner</th>
-            <th data-field="email">Email</th>
-            <th data-field="total">Total</th>
-            <th data-field="time">Time Ordered</th>
-            <th data-field="status">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= link_to "#{order.id}", user_order_path(order.user.id, order.id)%></td>
-            <td><%= order.user.name %></td>
-            <td><%= order.user.email %></td>
-            <td><%= order.total || 0.0 %></td>
-            <td><%= time_ago_in_words(order.created_at, include_seconds: true) + " ago" %></td>
-            <% if order.status=="pending"%>
+  <p style="margin: 20px">Pending Orders: <%= @orders.where(status: "pending").length %> Completed Orders: <%= @orders.where(status: "Completed").length %></p>
+  <%= will_paginate @orders%>
+  <ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header">
+    <!--
+      <ul class="row order-display title">
+        <li class="col m1">Order</li>
+        <li class="col m2">Owner</li>
+        <li class="col m1">Total</li>
+        <li class="col m2">Time Ordered</li>
+        <li class="col m2">Status</li>
+        <li class="col m1"></li>
+      </ul>
+      -->
+     </div>
+    <li>
+    <% @orders.each do |order| %>
+      <li>
+        <div class="collapsible-header">
+          <!--
+            <ul class="row order-display">
+              <li class="col m1"> <%= order.id %></li>
+              <li class="col m2"><%= order.user.name %></li>
+              <li class="col m1">N<%= order.total || 0.0 %></li>
+              <li class="col m2"><%= time_ago_in_words(order.created_at, include_seconds: true) + " ago"%></li>
               <%= form_for order, :url => {:controller=> 'administrator', :action => 'update', order_id: order.id, status: order.status }, method: :patch  do |f| %>
-                  <%= f.select :status, options_for_status, selected: order.status %>
-
-                <td>
-                  <%= f.submit "Confirm" %>
-                </td>
+              <li class="col m2"><%= f.select :status, options_for_status, selected: order.status %></li>
+                <li class="col m1"><%= f.submit "Confirm" %></li>
               <% end %>
-              <% else %>
-                <td><%= order.status %></td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
-     </div>
-     <div class="collapsible-body">
-       <table>
-         <thead>
-           <tr>
-             <th data-field="name">Name</th>
-             <th data-field="price">Price</th>
-             <th data-field="quantity">Quantity</th>
-           </tr>
-         </thead>
-         <tbody>
-           <% order.line_items.each do |order_item| %>
-           <% item = Item.find_by(id: order_item.item_id) %>
-           <% if item %>
-             <tr>
-               <td><%=link_to "#{item.name}", item_path(item.id) %></td>
-               <td><%= item.price %></td>
-               <td><%= order_item.quantity %></td>
-             </tr>
-            <% end %>
-         </tbody>
-         <tfoot>
 
-         </tfoot>
-       <% end %>
-       </table>
-     </div>
-   </li>
-   <% end %>
- </ul>
+            </ul>
+            -->
+          <table>
+            <thead>
+              <tr>
+                <th data-field="order">Order</th>
+                <th data-field="owner">Owner</th>
+                <th data-field="email">Email</th>
+                <th data-field="total">Total</th>
+                <th data-field="time">Time Ordered</th>
+                <th data-field="status">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= link_to "#{order.id}", user_order_path(order.user.id, order.id)%></td>
+                <td><%= order.user.name %></td>
+                <td><%= order.user.email %></td>
+                <td><%= order.total || 0.0 %></td>
+                <td><%= time_ago_in_words(order.created_at, include_seconds: true) + " ago" %></td>
+                <% if order.status=="pending"%>
+                  <%= form_for order, :url => {:controller=> 'administrator', :action => 'update', order_id: order.id, status: order.status }, method: :patch  do |f| %>
+                      <%= f.select :status, options_for_status, selected: order.status %>
+
+                      <td>
+                        <%= f.submit "Confirm" %>
+                      </td>
+                  <% end %>
+                <% else %>
+                  <td><%= order.status %></td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="collapsible-body">
+          <table>
+            <thead>
+              <tr>
+                <th data-field="name">Name</th>
+                <th data-field="price">Price</th>
+                <th data-field="quantity">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% order.line_items.each do |order_item| %>
+                <% item = Item.find_by(id: order_item.item_id) %>
+                <% if item %>
+                  <tr>
+                    <td><%=link_to "#{item.name}", item_path(item.id) %></td>
+                    <td><%= item.price %></td>
+                    <td><%= order_item.quantity %></td>
+                  </tr>
+                <% end %>
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+              <% end %>
+          </table>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 <% else %>
- <div class="container">There are no orders to display</div>
+  <div class="container">There are no orders to display</div>
 <% end %>

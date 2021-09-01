@@ -1,41 +1,41 @@
 <div class="row full-height">
- <%=render 'layouts/category' %>
- <div class="col s9 full-height scroll-bar">
-   <div class="panel header-panel flow-text z-depth-3"><%= (!@category.nil?) ? @category.name : "All cuisines"  %></div>
-  <div class="row">
-  <% @items.each do |item| %>
-      <div class="col s12 m6 l4">
-        <div class="card">
-          <div class="card-image">
-            <span class="price-tag" style="color: #4e342e; background: none"><%= item.price%> PKR</span>
-            <span class="activator"><i class="material-icons right">more_vert</i></span>
-            <%= link_to(item) do %>
-              <% if item.avatar.attached? %>
-                <%= image_tag(item.avatar, :width=> "100%", :height=> "auto", :style => "max-width:100%", :class => "image-thumb", :alt => "item")%>
-              <% else %>
-                <%= image_tag(("nigerian-jollof-rice.jpg"), :width => "100%", :height => "auto", :style => "max-width:100%", :class => "image-thumb", :alt => "item") %>
-              <% end%>
-              <span class="card-title" style="position:relative; color: #000"><%= item.name %></span>
-            <% end %>
+  <%=render 'layouts/category' %>
+  <div class="col s9 full-height scroll-bar">
+    <div class="panel header-panel flow-text z-depth-3"><%= (!@category.nil?) ? @category.name : "All cuisines"  %></div>
+    <div class="row">
+      <% @items.each do |item| %>
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-image">
+              <span class="price-tag" style="color: #4e342e; background: none"><%= item.price%> PKR</span>
+              <span class="activator"><i class="material-icons right">more_vert</i></span>
+              <%= link_to(item) do %>
+                <% if item.avatar.attached? %>
+                  <%= image_tag(item.avatar, :width=> "100%", :height=> "auto", :style => "max-width:100%", :class => "image-thumb", :alt => "item")%>
+                <% else %>
+                  <%= image_tag(("nigerian-jollof-rice.jpg"), :width => "100%", :height => "auto", :style => "max-width:100%", :class => "image-thumb", :alt => "item") %>
+                <% end%>
+                  <span class="card-title" style="position:relative; color: #000"><%= item.name %></span>
+                <% end %>
+              </div>
+              <div class="card-action">
+                <div class="right"><i class="material-icons left no-right-margin">shopping_cart</i><%= link_to "
+                #{this_item_in_cart(item)}", carts_path, class: "cart left no_left_pad no-right-margin", id: "cart" %></div>
+                <% if item.flag == true %>
+                  <%= button_to "Add to cart", cart_items_path(item_id: item.id) %>
+                <% else %>
+                  <p>Out of stock</p>
+                <% end %>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4"><%= item.name%><i class="material-icons right">close</i></span>
+                <p><%= item.price%></p>
+                <p><%= item.description%></p>
+              </div>
+            </div>
           </div>
-          <div class="card-action">
-            <div class="right"><i class="material-icons left no-right-margin">shopping_cart</i><%= link_to "
-						 #{this_item_in_cart(item)}", carts_path, class: "cart left no_left_pad no-right-margin", id: "cart" %></div>
-            <% if item.flag == true %>
-              <%= button_to "Add to cart", cart_items_path(item_id: item.id) %>
-            <% else %>
-              <p>Out of stock</p>
-            <% end %>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><%= item.name%><i class="material-icons right">close</i></span>
-            <p><%= item.price%></p>
-            <p><%= item.description%></p>
-          </div>
-        </div>
-      </div>
 
-  <% end %>
+      <% end %>
+    </div>
   </div>
- </div>
 </div>

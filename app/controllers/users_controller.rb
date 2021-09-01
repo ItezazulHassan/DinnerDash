@@ -8,7 +8,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
+    begin
+      @user = User.find_by(id: params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+      flash[:failure] = "User not found"
+      return
+    end
     args = args_params || {}
     if @user
       if !args.nil?
@@ -41,11 +47,18 @@ class UsersController < ApplicationController
   end
 
   def edit
+    redirect_to root_path unless user_signed_in?
     @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+      flash[:failure] = "User not found"
+      return
+    end
     if @user.update_attributes(user_params)
       flash[:success] = "Profile Successfully Updated"
       redirect_to @user
@@ -68,6 +81,6 @@ class UsersController < ApplicationController
     end
 
     def args_params
-      args = params.require(:args).permit(:show_all, :title) if params.has_key? "args"
+      params.require(:args).permit(:show_all, :title) if params.has_key? "args"
     end
 end

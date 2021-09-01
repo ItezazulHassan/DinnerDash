@@ -1,33 +1,37 @@
 <div class="row full-height">
   <% if @user %>
-    <% if @user.id == current_user.id %>
-    <div class="col s4 full-height scroll-bar profile_left_tab">
-      <div class="card medium">
-      <div class="card-image">
-          <%= image_tag "picture.png"%>
+    <% if user_signed_in?%>
+      <% if @user.id == current_user.id %>
+        <div class="col s4 full-height scroll-bar profile_left_tab">
+          <div class="card medium">
+            <div class="card-image">
+              <%= image_tag "picture.png"%>
+            </div>
+            <div class="card-content">
+              <p>Name: <%= @user.name %></p>
+              <p>Email: <%= @user.email %></p>
+              <p>Username: <%= @user.username %></p>
+            </div>
+            <div class="card-action">
+              <%= link_to "Edit Profile", edit_user_registration_path, :style=>"color: black" %>
+            <!-- </div> -->
+            <!-- <div class="card-action"> -->
+            <!--<%= link_to "View Orders", :args => { :show_all => true , :title => "All Orders"} %> -->
+            </div>
+          </div>
         </div>
-        <div class="card-content">
-          <p>Name: <%= @user.name %></p>
-          <p>Email: <%= @user.email %></p>
-          <p>Username: <%= @user.username %></p>
-        </div>
-        <div class="card-action">
-          <%= link_to "Edit Profile", edit_user_registration_path, :style=>"color: black" %>
-        <!-- </div> -->
-        <!-- <div class="card-action"> -->
-        <!--<%= link_to "View Orders", :args => { :show_all => true , :title => "All Orders"} %> -->
-        </div>
-      </div>
-    </div>
 
-    <div class="col s8">
-      <h4 class="order_header"><%= @title %></h4>
-        <%= render "layouts/orders_page" %>
-    </div>
+        <div class="col s8">
+          <h4 class="order_header"><%= @title %></h4>
+          <%= render "layouts/orders_page" %>
+        </div>
+      <% else %>
+        <div class="container">You don't have access for this</div>
+      <% end %>
     <% else %>
-      <div class="container">You don't have access for this</div>
+      <p>You are not signed in</p>
     <% end %>
   <% else %>
     <div class="container">There is no user to display</div>
-    <%end%>
+  <%end%>
 </div>

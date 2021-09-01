@@ -11,20 +11,20 @@
 	</thead>
 	<tbody>
 		
-<%  @current_order.total = 0 %>
-<% @current_order.line_items.each do |index, details| %>
-<% @item_total_price = details["item"]["price"] * details["qty"]
-@current_order.total += details["item"]["price"] * details["qty"] %>
-	<tr>
-		<td><%= index %></td>
-		<td><%= details["item"]['name'] %></td>
-		<td><%= details["item"]['description'] %></td>
-		<td><%= details["item"]['price'] %></td>
-		<td><%= details["qty"] %></td>
-		<td><%= @item_total_price %></td>
-	</tr>
+		<% @current_order.total = 0 %>
+		<% @current_order.line_items.each do |index, details| %>
+			<% @item_total_price = details["item"]["price"] * details["qty"]
+			@current_order.total += details["item"]["price"] * details["qty"] %>
+				<tr>
+					<td><%= index %></td>
+					<td><%= details["item"]['name'] %></td>
+					<td><%= details["item"]['description'] %></td>
+					<td><%= details["item"]['price'] %></td>
+					<td><%= details["qty"] %></td>
+					<td><%= @item_total_price %></td>
+			</tr>
 	</tbody>
-	<% end %>
+		<% end %>
 
 	<!--Find a better way of doing this -->
 	

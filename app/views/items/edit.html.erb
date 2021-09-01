@@ -3,36 +3,36 @@
     <div class="row container full-height scroll-bar">
       <h4>Edit Item</h4>
       <%= form_for @item, :html => { :multipart => true, :class => "col s12" } do |f| %>
-      <div class="row">
-        <div class="input-field col s12">
-          <%=f.text_field :name, :class => "validate" %>
-          <%= f.label :name, :class => "active", "data-error" => "#{@item.errors.messages['name']}" %>
-          <div class = "error"><%= @item.errors.messages[:name][0] %></div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%=f.text_field :name, :class => "validate" %>
+            <%= f.label :name, :class => "active", "data-error" => "#{@item.errors.messages['name']}" %>
+            <div class = "error"><%= @item.errors.messages[:name][0] %></div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <%=f.text_field :description, :class => "validate" %>
-          <%= f.label :description, :class => "active", "data-error" => "#{@item.errors.messages['description']}" %>
-          <div class = "error"><%= @item.errors.messages[:description][0] %></div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%=f.text_field :description, :class => "validate" %>
+            <%= f.label :description, :class => "active", "data-error" => "#{@item.errors.messages['description']}" %>
+            <div class = "error"><%= @item.errors.messages[:description][0] %></div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <%=f.text_field :price, :class => "validate" %>
-          <%= f.label :price, :class => "active", "data-error" => "#{@item.errors.messages['price']}" %>
-          <div class = "error"><%= @item.errors.messages[:price][0] %></div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%=f.text_field :price, :class => "validate" %>
+            <%= f.label :price, :class => "active", "data-error" => "#{@item.errors.messages['price']}" %>
+            <div class = "error"><%= @item.errors.messages[:price][0] %></div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <%= f.file_field :avatar%>
-      </div>
+        <div class="row">
+          <%= f.file_field :avatar%>
+        </div>
 
-      <div class="row">
-        <div class="input-field col s12">
-            <%= f.collection_select(:category_ids, @categories, :id, :name, {}, { :class => "select_box", :style => "display:block;" }) %>
+        <div class="row">
+          <div class="input-field col s12">
+              <%= f.collection_select(:category_ids, @categories, :id, :name, {}, { :class => "select_box", :style => "display:block;" }) %>
+          </div>
         </div>
-      </div>
         <%= f.submit "Update item", :class => "btn waves-effect waves-light" %>
       <% end %>
     </div>

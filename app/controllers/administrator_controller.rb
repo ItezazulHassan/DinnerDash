@@ -16,6 +16,11 @@ class AdministratorController < ApplicationController
   end
 
   def item_index
+    unless user_signed_in? && current_user.flag?
+      redirect_to root_path
+      flash[:errors] = "Access is denied"
+      return
+    end
     @items = Item.all.order(created_at: :desc)
     respond_to do |format|
       format.html { render :"administrator/show_item" }
@@ -23,6 +28,11 @@ class AdministratorController < ApplicationController
   end
 
   def order_index
+    unless user_signed_in? && current_user.flag?
+      redirect_to root_path
+      flash[:errors] = "Access is denied"
+      return
+    end
     @orders = Order.all.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html { render :"administrator/show_order" }
@@ -30,6 +40,11 @@ class AdministratorController < ApplicationController
   end
 
   def user_index
+    unless user_signed_in? && current_user.flag?
+      redirect_to root_path
+      flash[:errors] = "Access is denied"
+      return
+    end
     @users = User.all.paginate(page: params[:page],
                                per_page: 10).order(created_at: :desc)
     respond_to do |format|
@@ -38,6 +53,11 @@ class AdministratorController < ApplicationController
   end
 
   def category_index
+    unless user_signed_in? && current_user.flag?
+      redirect_to root_path
+      flash[:errors] = "Access is denied"
+      return
+    end
     @categories = Category.all.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html { render :"administrator/show_category" }
@@ -45,6 +65,11 @@ class AdministratorController < ApplicationController
   end
 
   def update
+    unless user_signed_in? && current_user.flag?
+      redirect_to root_path
+      flash[:errors] = "Access is denied"
+      return
+    end
     @title = "orders"
     @orders = Order.all.paginate(page: params[:page], per_page: 10)
     @status = params["order"]["status"]
